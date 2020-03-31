@@ -30,9 +30,9 @@ export class JobsController {
   }
 
   // TODO: set deleted to true on job object
-  @Delete('delete')
-  deleteJob(@Query('id') jobId: number) {
-    return this.jobService.delete(jobId);
+  @Delete(':id')
+  deleteJob(@Param() { id }) {
+    return this.jobService.delete(id);
   }
 
   @Get(':id')
