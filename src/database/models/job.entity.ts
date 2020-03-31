@@ -15,6 +15,12 @@ export enum JobType {
 
 @Table
 export class Job extends Model<Job> {
+  @Column({
+    defaultValue: DataType.UUIDV4,
+    primaryKey: true,
+    type: DataType.UUID
+  }) public id: string;
+
   @Column
   title: string;
 
@@ -31,8 +37,10 @@ export class Job extends Model<Job> {
   applicationLink: string;
 
   @ForeignKey(() => Company)
-  @Column
-  companyId: number;
+  @Column({
+    type: DataType.UUID
+  })
+  companyId: string;
 
   @BelongsTo(() => Company)
   company: Company;

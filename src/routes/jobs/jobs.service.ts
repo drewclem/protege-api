@@ -16,6 +16,14 @@ export class JobsService {
     });
   }
 
+  async find(id: number) {
+    return this.sequelize.model(Job).findOne({
+      where: {
+        id,
+      }
+    });
+  }
+
   async create(createJobDto: CreateJobDto) {
     return this.sequelize.model(Job).create({
       ...createJobDto,

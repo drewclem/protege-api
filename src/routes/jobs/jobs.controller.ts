@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Req, Delete, Body, Logger, Query } from '@nestjs/common';
+import { Controller, Get, Post, Req, Delete, Body, Logger, Query, Param } from '@nestjs/common';
 import { JobsService } from './jobs.service';
 import { JobRole, JobType } from 'src/database/models/job.entity';
 
@@ -8,7 +8,7 @@ export class CreateJobDto {
   type: JobType;
   description: string;
   applicationLink: string;
-  companyId: number;
+  companyId: string;
   sponsored: boolean;
 }
 
@@ -33,6 +33,11 @@ export class JobsController {
   @Delete('delete')
   deleteJob(@Query('id') jobId: number) {
     return this.jobService.delete(jobId);
+  }
+
+  @Get(':id')
+  getJob(@Param() { id }) {
+    return this.jobService.find(id);
   }
 
 }
