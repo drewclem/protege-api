@@ -16,7 +16,6 @@ import { Company } from './models/company.entity';
         username: configService.database.username,
         password: configService.database.password,
         database: configService.database.name,
-        models: [ Company, Job],
         autoLoadModels: true,
         synchronize: true,
         dialectOptions: {
