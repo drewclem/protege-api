@@ -41,5 +41,8 @@ export class Job extends Model<Job> {
   approved: boolean;
 
   @Column
+  deleted: boolean;
+
+  @Column
   sponsored: boolean;
 }

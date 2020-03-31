@@ -1,6 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Job } from 'src/database/models/job.entity';
 import { Sequelize } from 'sequelize-typescript';
+import { CreateJobDto } from './jobs.controller';
 
 @Injectable()
 export class JobsService {
@@ -13,6 +14,18 @@ export class JobsService {
     return this.sequelize.model(Job).findAll({
       ...pagination,
     });
+  }
+
+  async create(createJobDto: CreateJobDto) {
+    return this.sequelize.model(Job).create({
+      ...createJobDto,
+      approved: false,
+      deleted: false,
+    });
+  }
+
+  async delete(jobId: number) {
+    return this.sequelize.model(Job).update({ deleted: true }, { where: { id: jobId }});
   }
 
 }

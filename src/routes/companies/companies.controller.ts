@@ -6,7 +6,6 @@ import { CompaniesService } from './companies.service';
 export class CompaniesController {
 
   constructor(private companyService: CompaniesService) {
-
   }
 
   @Get()
