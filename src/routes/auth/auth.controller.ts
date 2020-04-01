@@ -1,8 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { AuthService } from './auth.service';
 
-/auth/verify
-
 @Controller('auth')
 export class AuthController {
 
