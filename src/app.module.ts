@@ -1,13 +1,27 @@
-import { Module } from '@nestjs/common';
+import { Module, MiddlewareConsumer } from '@nestjs/common';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { AuthModule } from './auth/auth.module';
-import { UsersModule } from './users/users.module';
-import { JobsModule } from './jobs/jobs.module';
+import { AuthModule } from './routes/auth/auth.module';
+import { JobsModule } from './routes/jobs/jobs.module';
+import { DatabaseModule } from './database/database.module';
+import { UsersModule } from './routes/users/users.module';
+import { PaginationMiddleware } from './middleware/pagination.middleware';
+import { CompaniesModule } from './routes/companies/companies.module';
 
 @Module({
-  imports: [AuthModule, UsersModule, JobsModule],
+  imports: [
+    AuthModule,
+    UsersModule,
+    JobsModule,
+    DatabaseModule,
+    CompaniesModule,
+  ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [ ]
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(PaginationMiddleware)
+      .forRoutes('*');
+  }
+}
