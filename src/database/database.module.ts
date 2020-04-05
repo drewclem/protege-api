@@ -4,6 +4,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { ConfigModule } from 'src/config/config.module';
 import { Job } from './models/job.entity';
 import { Company } from './models/company.entity';
+import { User } from './models/user.entity';
 
 @Module({
   imports: [
@@ -27,5 +28,10 @@ import { Company } from './models/company.entity';
       inject: [ ConfigService ],
     }),
   ],
+  exports: [
+    Job,
+    User,
+    Company,
+  ]
 })
 export class DatabaseModule {}

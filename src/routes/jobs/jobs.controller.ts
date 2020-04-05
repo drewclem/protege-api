@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Req, Delete, Body, Logger, Query, Param } from '@nestjs/common';
+import { Controller, Get, Post, Req, Delete, Body, Param, UseInterceptors } from '@nestjs/common';
 import { JobsService } from './jobs.service';
 import { JobRole, JobType } from 'src/database/models/job.entity';
 import { ApiProperty } from '@nestjs/swagger';
+import { PaginationInterceptor } from 'src/interceptors/pagination.interceptor';
 
 export class CreateJobDto {
   @ApiProperty({
@@ -34,6 +35,7 @@ export class CreateJobDto {
   sponsored: boolean;
 }
 
+@UseInterceptors(new PaginationInterceptor())
 @Controller('jobs')
 export class JobsController {
 
