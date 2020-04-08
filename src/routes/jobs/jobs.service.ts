@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Job } from 'src/database/models/job.entity';
 import { Sequelize } from 'sequelize-typescript';
 import { CreateJobDto } from './jobs.controller';
@@ -20,7 +20,8 @@ export class JobsService {
     return this.sequelize.model(Job).findOne({
       where: {
         id,
-      }
+      },
+      raw: true,
     });
   }
 
